@@ -8,6 +8,6 @@ namespace CleanArchMvc.Domain.Interfaces
         Task<Category> GetById(int? id);
         Task<Category> Create(Category category);
         Task<Category> Update(Category category);
-        Task<Category> Remover(Category category);
+        Task<Category> Remove(Category category);
     }
 }

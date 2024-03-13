@@ -37,7 +37,7 @@ namespace CleanArchMvc.Infra.Data.Repositories
             return await _productContext.Products.ToListAsync();
         }
 
-        public async Task<Product> RemoverAsync(Product product)
+        public async Task<Product> RemoveAsync(Product product)
         {
             _productContext.Remove(product);
             await _productContext.SaveChangesAsync();
