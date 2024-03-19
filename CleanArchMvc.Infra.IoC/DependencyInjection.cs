@@ -1,6 +1,5 @@
 ﻿using CleanArchMvc.Application.Interfaces;
 using CleanArchMvc.Application.Mappings;
-using CleanArchMvc.Application.Products.Handlers;
 using CleanArchMvc.Application.Services;
 using CleanArchMvc.Domain.Interfaces;
 using CleanArchMvc.Infra.Data.Context;
@@ -8,7 +7,6 @@ using CleanArchMvc.Infra.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace CleanArchMvc.Infra.IoC
 {
@@ -30,10 +28,10 @@ namespace CleanArchMvc.Infra.IoC
             //services.AddMediatR(myHandlers);
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CleanArchMvc.Application.Products.Handlers.GetProductByIdQueryHandler).Assembly));
-                 //typeof(GetProductsQueryHandler).Assembly,
-                 //typeof(ProductCreateCommandHandler).Assembly,
-                 //typeof(ProductRemoveCommandHandler).Assembly, 
-                 //typeof(ProductUpdateCommandHandler).Assembly));
+            //typeof(GetProductsQueryHandler).Assembly,
+            //typeof(ProductCreateCommandHandler).Assembly,
+            //typeof(ProductRemoveCommandHandler).Assembly, 
+            //typeof(ProductUpdateCommandHandler).Assembly));
 
 
 
