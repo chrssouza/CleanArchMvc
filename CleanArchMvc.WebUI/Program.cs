@@ -1,3 +1,4 @@
+using CleanArchMvc.Domain.Account;
 using CleanArchMvc.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+CriarPerfisUsuarios(app);
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -28,3 +32,16 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void CriarPerfisUsuarios(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        //cria os perfis
+        service.SeedRoles();
+        //cria os usuários e atribui ao perfil
+        service.SeedUsers();
+    }
+}
