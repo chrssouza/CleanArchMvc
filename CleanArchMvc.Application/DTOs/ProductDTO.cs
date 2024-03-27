@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CleanArchMvc.Application.DTOs
 {
@@ -29,7 +30,7 @@ namespace CleanArchMvc.Application.DTOs
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "The Stock is Required")]
-        [Range(1, 9999)]
+        //[Range(1, 9999)]
         [DisplayName("Stock")]
         public int Stock { get; set; }
 
@@ -37,6 +38,7 @@ namespace CleanArchMvc.Application.DTOs
         [DisplayName("Product Image")]
         public string Image { get; set; }
 
+        [JsonIgnore]
         public Category Category { get; set; }
 
         [DisplayName("Categories")]
