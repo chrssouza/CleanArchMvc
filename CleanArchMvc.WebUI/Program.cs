@@ -22,7 +22,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-CriarPerfisUsuarios(app);
+SeedUserRoles(app);
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -33,15 +33,14 @@ app.MapControllerRoute(
 
 app.Run();
 
-void CriarPerfisUsuarios(WebApplication app)
+void SeedUserRoles(IApplicationBuilder app)
 {
-    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
-    using (var scope = scopedFactory.CreateScope())
+    using (var serviceScope = app.ApplicationServices.CreateScope())
     {
-        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
-        //cria os perfis
-        service.SeedRoles();
-        //cria os usuários e atribui ao perfil
-        service.SeedUsers();
+        var seed = serviceScope.ServiceProvider
+                               .GetService<ISeedUserRoleInitial>();
+        seed.SeedRoles();
+        seed.SeedUsers();
+
     }
 }

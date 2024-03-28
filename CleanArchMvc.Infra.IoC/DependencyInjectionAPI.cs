@@ -31,15 +31,10 @@ namespace CleanArchMvc.Infra.IoC
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
-            services.AddScoped<IAuthenticate, AuthenticateService>();  
-                
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CleanArchMvc.Application.Products.Handlers.GetProductByIdQueryHandler).Assembly));
-            //typeof(GetProductsQueryHandler).Assembly,
-            //typeof(ProductCreateCommandHandler).Assembly,
-            //typeof(ProductRemoveCommandHandler).Assembly, 
-            //typeof(ProductUpdateCommandHandler).Assembly));
+            services.AddScoped<IAuthenticate, AuthenticateService>();
 
-
+            var myHandlers = AppDomain.CurrentDomain.Load("CleanArchMvc.Application");
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(myHandlers));
 
             return services;
         }
