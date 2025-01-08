@@ -55,10 +55,11 @@ namespace CleanArchMvc.Application.Services
 
         public async Task Remove(int? id)
         {
-            var productRemoveCommand = new ProductRemoveCommand(id.Value);
+            if (!id.HasValue)               
+               throw new Exception($"Entity could not be loaled.");
 
-            if (productRemoveCommand == null)
-                throw new Exception($"Entity could not be loaled.");
+            var productRemoveCommand = new ProductRemoveCommand(id.Value);
+            
 
             await _mediator.Send(productRemoveCommand);
         }
